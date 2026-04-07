@@ -1,0 +1,94 @@
+@base_url = http://127.0.0.1:8001
+
+### 1. Register User
+POST {{base_url}}/api/auth/registration/
+Content-Type: application/json
+
+{
+  "first_name": "test",
+  "last_name": "user",
+  "username": "testuser",
+  "email": "test@example.com",
+  "password1": "NewPass123!",
+  "password2": "NewPass123!"
+}
+
+### 2. Login with JWT
+# @name login
+POST {{base_url}}/api/auth/login/
+Content-Type: application/json
+
+{
+  "username": "testuser",
+  "password": "NewPass123!"
+}
+
+### 3. Get Current User
+GET {{base_url}}/api/auth/user/
+Authorization: Bearer {{login.response.body.access}}
+
+### 4. Update User Profile (Partial Update)
+PATCH {{base_url}}/api/auth/user/
+Authorization: Bearer {{login.response.body.access}}
+Content-Type: application/json
+
+{
+  "first_name": "test",
+  "last_name": "user"
+}
+
+### 5. Change Password
+# NOTE: old_password must match your current active password (TestPass123!)
+POST {{base_url}}/api/auth/password/change/
+Authorization: Bearer {{login.response.body.access}}
+Content-Type: application/json
+
+{
+  "old_password": "NewPass123!",
+  "new_password1": "NewSecurePass123!",
+  "new_password2": "NewSecurePass123!"
+}
+
+### 6. Refresh Token
+POST {{base_url}}/api/auth/token/refresh/
+Content-Type: application/json
+
+{
+  "refresh": "{{login.response.body.refresh}}"
+}
+
+### 7. Verify Token
+POST {{base_url}}/api/auth/token/verify/
+Content-Type: application/json
+
+{
+  "token": "{{login.response.body.access}}"
+}
+
+### 8. Password Reset Request
+POST {{base_url}}/api/auth/password/reset/
+Content-Type: application/json
+
+{
+  "email": "justpython.india@gmail.com"
+}
+
+### 9. Password Reset Confirm
+POST {{base_url}}/api/auth/password/reset/confirm/
+Content-Type: application/json
+
+{
+    "new_password1": "FinalSecurePass123!",
+    "new_password2": "FinalSecurePass123!",
+    "uid": "MQ", 
+    "token": "d59rz0-580e7d78e6d0c3bc9d476ec7d30ec223"
+}
+
+### 10. Logout
+POST {{base_url}}/api/auth/logout/
+Authorization: Bearer {{login.response.body.access}}
+Content-Type: application/json
+
+{
+  "refresh": "{{login.response.body.refresh}}"
+}
