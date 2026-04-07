@@ -10,8 +10,8 @@ SECRET_KEY = 'django-insecure-k$zfp67eq4=4b^!ovpd$4#z_!^2*n*=ih&g2q7vc4+#agq5jvk
 DEBUG = False
 
 ALLOWED_HOSTS = [
-    'sudarshanmestha.pythonanywhere.com', 
-    'fullstack-website-reintenspark.vercel.app',
+    'justpythonindia.pythonanywhere.com', 
+    'www.justpython.in',
     'localhost', 
     '127.0.0.1'
 ]
@@ -51,7 +51,7 @@ INSTALLED_APPS = [
 # Custom User Model for ReintenSpark
 AUTH_USER_MODEL = 'core.User'
 
-FRONTEND_URL = 'https://fullstack-website-reintenspark.vercel.app'
+FRONTEND_URL = 'www.justpython.in'
 
 # Auth Redirection
 LOGIN_REDIRECT_URL = '/'
@@ -112,15 +112,17 @@ TEMPLATES = [
 
 # CORS and CSRF Configuration
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",
-    "https://fullstack-website-reintenspark-ar2evgcl7.vercel.app",
-    "https://fullstack-website-reintenspark.vercel.app",
+    "https://www.justpython.in",
+    "https://justpython.in",
+    "https://justpython-websit-git-main-sudarshans-projects-09ba09c5.vercel.app",
+    "https://justpython-websit-ne7fhxb1q-sudarshans-projects-09ba09c5.vercel.app"
 ]
 
 CSRF_TRUSTED_ORIGINS = [
-    'http://localhost:3000',
-    'https://fullstack-website-reintenspark.vercel.app',
-    'https://fullstack-website-reintenspark-ar2evgcl7.vercel.app',
+    "https://www.justpython.in",
+    "https://justpython.in",
+    "https://justpython-websit-git-main-sudarshans-projects-09ba09c5.vercel.app",
+    "https://justpython-websit-ne7fhxb1q-sudarshans-projects-09ba09c5.vercel.app"
 ]
 
 CORS_URLS_REGEX = r"^/api/.*$"
