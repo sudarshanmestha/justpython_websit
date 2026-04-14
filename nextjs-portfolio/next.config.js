@@ -1,3 +1,4 @@
+// next.config.js
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
@@ -10,13 +11,12 @@ const nextConfig = {
       { protocol: 'https', hostname: 'justpythonindia.pythonanywhere.com', pathname: '/media/**' },
       
       // VERCEL PREVIEW & PRODUCTION
-      { protocol: 'https', hostname: '**' }, 
+      { protocol: 'https', hostname: '**' }, // Allows ANY domain in production
     ],
   },
-  // REMOVED basePath and assetPrefix. 
-  // Vercel handles these automatically. Setting them to '' can 
-  // break the internal routing manifest on the Edge Network.
-  
+  // THIS MAKES YOUR <BaseUrl> COMPONENT WORK ON VERCEL
+  basePath: '',
+  assetPrefix: '',
   trailingSlash: false,
 }
 
