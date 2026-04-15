@@ -56,39 +56,42 @@ export default function Navbar() {
           </div>
 
           {/* MOBILE & DESKTOP NAVIGATION */}
-          <div className={`
-            fixed inset-0 z-40 flex flex-col items-center justify-center gap-8 transition-transform duration-300 lg:static lg:flex lg:flex-row lg:bg-transparent lg:inset-auto lg:translate-x-0
-            ${visibleNav ? 'translate-x-0 bg-white dark:bg-[#021b1b]' : 'translate-x-full lg:translate-x-0'}
-          `}>
-            <nav className="flex flex-col lg:flex-row items-center gap-4 lg:gap-3">
-              {navItems.map((item) => (
-                <Link
-                  key={item.path}
-                  href={item.path}
-                  onClick={() => setVisibleNav(false)}
-                  className={`
-                    px-6 py-3 text-lg lg:text-sm font-bold uppercase tracking-[0.15em] transition-all rounded-full
-                    ${pathname === item.path 
-                      ? 'text-black bg-[#39FF14] shadow-[0_0_20px_rgba(57,255,20,0.5)]' 
-                      : 'text-neutral-600 dark:text-white/80 hover:text-[#39FF14]'}
-                  `}
-                >
-                  {item.name}
-                </Link>
-              ))}
+        <div className={`
+          fixed inset-0 z-40 flex flex-col items-center justify-center gap-8 transition-transform duration-300
+          lg:static lg:flex lg:flex-row lg:inset-auto lg:translate-x-0
+          lg:bg-neutral-100 lg:dark:bg-white/10 lg:border lg:border-neutral-200 lg:dark:border-white/10 lg:rounded-full lg:px-2 lg:py-1.5
+          ${visibleNav ? 'translate-x-0 bg-white dark:bg-[#021b1b]' : 'translate-x-full lg:translate-x-0'}
+        `}>
+          {/* FIX: reduced gap from gap-3 to gap-1, tighter padding on links */}
+          <nav className="flex flex-col lg:flex-row items-center gap-4 lg:gap-1">
+            {navItems.map((item) => (
+              <Link
+                key={item.path}
+                href={item.path}
+                onClick={() => setVisibleNav(false)}
+                className={`
+                  px-6 py-3 text-lg lg:text-xs lg:px-3 lg:py-2 font-bold uppercase tracking-[0.08em] transition-all rounded-full whitespace-nowrap
+                  ${pathname === item.path 
+                    ? 'text-black bg-[#39FF14] shadow-[0_0_20px_rgba(57,255,20,0.5)]' 
+                    : 'text-neutral-600 dark:text-white/80 hover:text-[#39FF14]'}
+                `}
+              >
+                {item.name}
+              </Link>
+            ))}
 
-              {/* MOBILE LOGIN BUTTON (Visible only inside the drawer on small screens) */}
-              {!loading && !isAuthenticated && (
-                <Link
-                  href="/auth/login"
-                  onClick={() => setVisibleNav(false)}
-                  className="lg:hidden mt-4 px-10 py-4 bg-[#39FF14] text-black text-sm font-bold uppercase tracking-widest rounded-full shadow-[0_0_20px_rgba(57,255,20,0.4)]"
-                >
-                  Login
-                </Link>
-              )}
-            </nav>
-          </div>
+            {/* MOBILE LOGIN BUTTON */}
+            {!loading && !isAuthenticated && (
+              <Link
+                href="/auth/login"
+                onClick={() => setVisibleNav(false)}
+                className="lg:hidden mt-4 px-10 py-4 bg-[#39FF14] text-black text-sm font-bold uppercase tracking-widest rounded-full shadow-[0_0_20px_rgba(57,255,20,0.4)]"
+              >
+                Login
+              </Link>
+            )}
+          </nav>
+        </div>
 
           {/* RIGHT ACTIONS */}
           <div className="flex items-center gap-4 lg:pl-8">
