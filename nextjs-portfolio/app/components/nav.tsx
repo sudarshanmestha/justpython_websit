@@ -14,7 +14,7 @@ const navItems = [
   { name: 'Home', path: '/' },
   { name: 'Projects', path: '/projects' },
   { name: 'Hardware', path: '/hardware' },
-  { name: 'Ai-Tools', path: '/Ai-Tools' },
+  { name: 'Ai-Tools', path: '/ai-tools' },
   // { name: 'R&D', path: '/rd' },
   // { name: 'Careers', path: '/careers' },
   { name: 'Contact', path: '/contact' }, 
