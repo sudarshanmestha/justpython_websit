@@ -1,7 +1,7 @@
 # npm run dev
 
 ├── app
-│   ├── Ai-Tools
+│   ├── ai-tools
 │   │   ├── page.tsx
 │   │   ├── posts
 │   │   └── utils.ts

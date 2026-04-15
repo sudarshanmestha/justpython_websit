@@ -39,7 +39,7 @@ function getMDXData(dir: string) {
 }
 
 export function getBlogPosts() {
-  const dir = path.join(process.cwd(), 'app', 'Ai-Tools', 'posts')
+  const dir = path.join(process.cwd(), 'app', 'ai-tools', 'posts')
   return getMDXData(dir)
 }
 
