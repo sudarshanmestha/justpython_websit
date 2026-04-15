@@ -1,4 +1,3 @@
-// next.config.js
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
@@ -11,12 +10,13 @@ const nextConfig = {
       { protocol: 'https', hostname: 'justpythonindia.pythonanywhere.com', pathname: '/media/**' },
       
       // VERCEL PREVIEW & PRODUCTION
-      { protocol: 'https', hostname: '**' }, // Allows ANY domain in production
+      { protocol: 'https', hostname: '**' }, 
     ],
   },
-  // THIS MAKES YOUR <BaseUrl> COMPONENT WORK ON VERCEL
-  basePath: '',
-  assetPrefix: '',
+  // REMOVE: basePath and assetPrefix. 
+  // Vercel handles these automatically. If you leave them as '', 
+  // it can cause the 404: NOT_FOUND error on your homepage.
+
   trailingSlash: false,
 }
 
