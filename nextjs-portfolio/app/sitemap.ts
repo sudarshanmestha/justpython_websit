@@ -1,4 +1,4 @@
-import { getBlogPosts } from './Ai-Tools/utils'
+import { getBlogPosts } from './ai-tools/utils'
 
 export const baseUrl = 'https://portfolio-blog-starter.vercel.app'
 
