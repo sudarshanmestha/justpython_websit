@@ -5,3 +5,4 @@ django-cors-headers
 dj-rest-auth
 dj-rest-auth[with_social]
 Pillow
+django-allauth

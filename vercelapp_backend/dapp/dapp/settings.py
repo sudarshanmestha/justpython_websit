@@ -29,8 +29,6 @@ INSTALLED_APPS = [
     'dj_rest_auth.registration',
 
     'allauth.socialaccount',
-    'allauth.socialaccount.providers.facebook',
-    'allauth.socialaccount.providers.twitter',
     'allauth.socialaccount.providers.google',
 
     'corsheaders',
@@ -44,14 +42,18 @@ INSTALLED_APPS = [
 # --- LOCAL SETUP: Point to local frontend ---
 FRONTEND_URL = 'http://localhost:3000'
 
-LOGIN_REDIRECT_URL = '/'
-LOGOUT_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = "/"
+LOGOUT_REDIRECT_URL = "/"
+
+# LOGIN_REDIRECT_URL = f"{FRONTEND_URL}/dashboard"
+# LOGOUT_REDIRECT_URL = f"{FRONTEND_URL}/"
 
 AUTH_USER_MODEL = 'core.User' 
 
 ACCOUNT_LOGIN_METHODS = {'username'}
 ACCOUNT_SIGNUP_FIELDS = ['username*', "email*", "password1*", "password2*"]
-ACCOUNT_EMAIL_VERIFICATION = 'optional'
+ACCOUNT_EMAIL_VERIFICATION = 'none'
+ACCOUNT_EMAIL_REQUIRED = False
 ACCOUNT_EMAIL_CONFIRMATION_AUTHENTICATED_REDIRECT_URL = "/"
 SITE_ID = 1
 

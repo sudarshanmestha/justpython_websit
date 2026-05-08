@@ -3,20 +3,14 @@ import os
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-k$zfp67eq4=4b^!ovpd$4#z_!^2*n*=ih&g2q7vc4+#agq5jvk'
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+# --- LOCAL SETUP: Enable Debug ---
+DEBUG = True
 
-ALLOWED_HOSTS = [
-    'justpythonindia.pythonanywhere.com', 
-    'www.justpython.in',
-    'localhost', 
-    '127.0.0.1'
-]
+# --- LOCAL SETUP: Simplify Allowed Hosts ---
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', "justpythonindia.pythonanywhere.com"]
 
-# Application definition
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -35,32 +29,31 @@ INSTALLED_APPS = [
     'dj_rest_auth.registration',
 
     'allauth.socialaccount',
-    'allauth.socialaccount.providers.facebook',
-    'allauth.socialaccount.providers.twitter',
     'allauth.socialaccount.providers.google',
 
     'corsheaders',
-    
-    # Custom project apps
+
     'post_app',
     'DocPost',
     'core',
     'courses',
 ]
 
-# Custom User Model for ReintenSpark
+# --- LOCAL SETUP: Point to local frontend ---
+FRONTEND_URL = 'https://justpython.in'
+
+LOGIN_REDIRECT_URL = "/"
+LOGOUT_REDIRECT_URL = "/"
+
+# LOGIN_REDIRECT_URL = f"{FRONTEND_URL}/dashboard"
+# LOGOUT_REDIRECT_URL = f"{FRONTEND_URL}/"
+
 AUTH_USER_MODEL = 'core.User'
 
-FRONTEND_URL = 'www.justpython.in'
-
-# Auth Redirection
-LOGIN_REDIRECT_URL = '/'
-LOGOUT_REDIRECT_URL = '/'
-
-# Allauth / dj-rest-auth Settings
 ACCOUNT_LOGIN_METHODS = {'username'}
 ACCOUNT_SIGNUP_FIELDS = ['username*', "email*", "password1*", "password2*"]
-ACCOUNT_EMAIL_VERIFICATION = 'optional' # Lowercase is standard
+ACCOUNT_EMAIL_VERIFICATION = 'none'
+ACCOUNT_EMAIL_REQUIRED = False
 ACCOUNT_EMAIL_CONFIRMATION_AUTHENTICATED_REDIRECT_URL = "/"
 SITE_ID = 1
 
@@ -73,7 +66,7 @@ REST_AUTH = {
 }
 
 MIDDLEWARE = [
-    'corsheaders.middleware.CorsMiddleware', # Placed high to handle pre-flight requests
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'allauth.account.middleware.AccountMiddleware',
@@ -92,7 +85,6 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.IsAuthenticatedOrReadOnly',
     ),
 }
-
 ROOT_URLCONF = 'dapp.urls'
 
 TEMPLATES = [
@@ -110,26 +102,26 @@ TEMPLATES = [
     },
 ]
 
-# CORS and CSRF Configuration
+# --- LOCAL SETUP: Keep only local origins ---
 CORS_ALLOWED_ORIGINS = [
-    "https://www.justpython.in",
     "https://justpython.in",
-    "https://justpython-websit-git-main-sudarshans-projects-09ba09c5.vercel.app",
-    "https://justpython-websit-ne7fhxb1q-sudarshans-projects-09ba09c5.vercel.app"
+    "https://www.justpython.in",
+    "https://nextjs-portfolio-three-amber-18.vercel.app",
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
 ]
 
 CSRF_TRUSTED_ORIGINS = [
-    "https://www.justpython.in",
     "https://justpython.in",
-    "https://justpython-websit-git-main-sudarshans-projects-09ba09c5.vercel.app",
-    "https://justpython-websit-ne7fhxb1q-sudarshans-projects-09ba09c5.vercel.app"
+    "https://www.justpython.in",
+    "https://nextjs-portfolio-three-amber-18.vercel.app",
+    'http://localhost:3000',
+    'http://127.0.0.1:3000',
 ]
-
 CORS_URLS_REGEX = r"^/api/.*$"
 
 WSGI_APPLICATION = 'dapp.wsgi.application'
 
-# Database configuration
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -137,7 +129,6 @@ DATABASES = {
     }
 }
 
-# Password Validation for Production Security
 AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',},
     {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',},
@@ -150,8 +141,8 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_TZ = True
 
-# Static and Media Files
 STATIC_URL = 'static/'
+# STATIC_ROOT not strictly needed for local runserver but fine to keep
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 MEDIA_URL = '/media/'
@@ -159,11 +150,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# Production Email Settings (SMTP via Gmail)
-EMAIL_BACKEND       = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST          = 'smtp.gmail.com'
-EMAIL_PORT          = 587
-EMAIL_USE_TLS       = True
-EMAIL_HOST_USER     = 'sudarshan15399@gmail.com'
-EMAIL_HOST_PASSWORD = 'iytvezyqavnjsdhd' # Using App Password
-DEFAULT_FROM_EMAIL  = 'ReintenSpark <sudarshan15399@gmail.com>' 
+# --- LOCAL SETUP: Console Email Backend ---
+# This prints verification emails to your terminal instead of sending them.
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
